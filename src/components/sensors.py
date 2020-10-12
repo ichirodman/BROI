@@ -14,7 +14,6 @@ class Sensor:
     def __init__(self, sensor_address):
         self._ADDRESS = sensor_address
         print("Hello, sensor, {}".format(sensor_address))
-        '''
         self._init()
 
     def _init(self):
@@ -30,7 +29,6 @@ class Sensor:
         time.sleep(0.5)
         timing = min(self._sensor_interface.get_timing(), 20000)
         print("timing %d ms" % (timing / 1000))
-        '''
 
     def get_distance(self):
         pass
