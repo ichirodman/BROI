@@ -15,11 +15,11 @@ class Sensor:
         self._init()
 
     def _init(self):
-        self._sensor_interface = VL53L0X.VL53L0X(address=0x2B)
         GPIO.setwarnings(False)
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(self._ADDRESS, GPIO.OUT)
         GPIO.output(self._ADDRESS, GPIO.LOW)
+        self._sensor_interface = VL53L0X.VL53L0X(address=0x2B)
         time.sleep(0.5)
         GPIO.output(self._ADDRESS, GPIO.HIGH)
         time.sleep(0.5)
