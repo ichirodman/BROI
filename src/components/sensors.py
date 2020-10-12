@@ -1,8 +1,6 @@
-'''
 import time
 import RPi.GPIO as GPIO
 import VL53L0X
-'''
 
 from config.distance_sensors import *
 
