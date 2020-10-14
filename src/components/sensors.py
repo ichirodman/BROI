@@ -1,6 +1,6 @@
 import time
 import RPi.GPIO as GPIO
-import VL53L0X
+from libs.sensors.VL53L0X import VL53L0X
 
 from config.distance_sensors import *
 
@@ -19,7 +19,7 @@ class Sensor:
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(self._ADDRESS, GPIO.OUT)
         GPIO.output(self._ADDRESS, GPIO.LOW)
-        self._sensor_interface = VL53L0X.VL53L0X(address=0x2B)
+        self._sensor_interface = VL53L0X(address=self._ADDRESS)
         time.sleep(0.5)
         GPIO.output(self._ADDRESS, GPIO.HIGH)
         time.sleep(0.5)
