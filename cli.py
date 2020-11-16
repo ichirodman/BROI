@@ -24,8 +24,9 @@ def sensor_test():
                                                Sensor.B_S_R, Sensor.B_S_L, Sensor.L_S_B, Sensor.L_S_F],
                                               ["F_S_L", "F_S_R", "R_S_F", "R_S_B", "B_S_R", "B_S_L", "L_S_B", "L_S_F"]):
         print('Connecting to {}'.format(position_name))
-        sensor = Sensor(sensor_position).unplug()
+        sensor = Sensor(sensor_position)
         try:
+            sensor.get_distance()
             print('Values from : ', end='')
             for _ in range(10):
                 print(sensor.get_distance(), end='; ')
