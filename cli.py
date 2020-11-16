@@ -30,6 +30,8 @@ def sensor_test():
             print('Values from : ', end='')
             for _ in range(10):
                 print(sensor.get_distance(), end='; ')
+            print()
+            print()
         except AttributeError:
             print('Sensor is not set')
         print('-' * 20)
