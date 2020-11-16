@@ -23,15 +23,18 @@ class Sensor:
         GPIO.setwarnings(False)
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(self._PIN, GPIO.OUT)
-        GPIO.output(self._ADDRESS, GPIO.LOW)
+        GPIO.output(self._PIN, GPIO.LOW)
         self._sensor_interface = VL53L0X(address=self._ADDRESS)
         time.sleep(0.5)
-        GPIO.output(self._ADDRESS, GPIO.HIGH)
+        GPIO.output(self._PIN, GPIO.HIGH)
         time.sleep(0.5)
         self._sensor_interface.start_ranging(4)
         time.sleep(0.5)
         timing = min(self._sensor_interface.get_timing(), 20000)
         print("timing %d ms" % (timing / 1000))
+
+    def unplug(self):
+        GPIO.output(self._PIN, GPIO.LOW)
 
     def get_distance(self):
         pass
