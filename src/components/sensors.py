@@ -25,6 +25,7 @@ class Sensor:
         GPIO.setup(self._PIN, GPIO.OUT)
         GPIO.output(self._PIN, GPIO.LOW)
         self._sensor_interface = VL53L0X(address=self._ADDRESS)
+        print(self._sensor_interface)
         time.sleep(0.5)
         GPIO.output(self._PIN, GPIO.HIGH)
         time.sleep(0.5)
