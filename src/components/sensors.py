@@ -6,7 +6,7 @@ from config.distance_sensors import *
 
 
 class Sensor:
-    F_S_L, F_S_R, R_S_F, R_S_B, B_S_R, B_S_L, L_S_B, L_S_R = list(range(8))
+    F_S_L, F_S_R, R_S_F, R_S_B, B_S_R, B_S_L, L_S_B, L_S_F = list(range(8))
     _ADDRESS = None
     _PIN = None
     _sensor_interface = None
