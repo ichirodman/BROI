@@ -37,4 +37,4 @@ class Sensor:
         GPIO.output(self._PIN, GPIO.LOW)
 
     def get_distance(self):
-        pass
+        return max(0, min(1000, self._sensor_interface.get_distance()))
