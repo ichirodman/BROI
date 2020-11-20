@@ -3,33 +3,34 @@ from src.components.sensors import Sensor
 
 
 class RobboOlympic:
-    _gear: Gear = None
+    _gear = None
     _sensor_f_s_l, _sensor_f_s_r = None, None
     _sensor_r_s_f, _sensor_r_s_b = None, None
     _sensor_b_s_r, _sensor_b_s_l = None, None
     _sensor_l_s_b, _sensor_l_s_f = None, None
 
-    def __init__(self):
+    def __init__(self, init_sensors = True):
         self._gear = Gear()
-        self._sensor_f_s_l = Sensor(Sensor.F_S_L)
-        self._sensor_f_s_r = Sensor(Sensor.F_S_R)
-        self._sensor_r_s_f = Sensor(Sensor.R_S_F)
-        self._sensor_r_s_b = Sensor(Sensor.R_S_B)
-        self._sensor_b_s_r = Sensor(Sensor.B_S_R)
-        self._sensor_b_s_l = Sensor(Sensor.B_S_L)
-        self._sensor_l_s_b = Sensor(Sensor.L_S_B)
-        self._sensor_l_s_f = Sensor(Sensor.L_S_F)
+        if init_sensors:
+            self._sensor_f_s_l = Sensor(Sensor.F_S_L)
+            self._sensor_f_s_r = Sensor(Sensor.F_S_R)
+            self._sensor_r_s_f = Sensor(Sensor.R_S_F)
+            self._sensor_r_s_b = Sensor(Sensor.R_S_B)
+            self._sensor_b_s_r = Sensor(Sensor.B_S_R)
+            self._sensor_b_s_l = Sensor(Sensor.B_S_L)
+            self._sensor_l_s_b = Sensor(Sensor.L_S_B)
+            self._sensor_l_s_f = Sensor(Sensor.L_S_F)
 
-    def move_forward(self, power_value: int):
+    def move_forward(self, power_value):
         self._gear.power(power_value, power_value, power_value, power_value)
 
-    def move_backward(self, power_value: int):
+    def move_backward(self, power_value):
         self.move_forward(-power_value)
 
-    def move_left(self, power_value: int):
+    def move_left(self, power_value):
         self._gear.power(-power_value, power_value, power_value, -power_value)
 
-    def move_right(self, power_value: int):
+    def move_right(self, power_value):
         self.move_left(-power_value)
 
     def move_counterclockwise(self, power_value):
