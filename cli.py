@@ -55,17 +55,25 @@ def sensor_test():
 def gear_debug():
     ro = RobboOlympic(init_sensors=False)
     while True:
-        c = int(input())
-        if c == 0:
-            ro.stop_moving()
-        elif c == 1:
-            ro.move_forward(600)
-        elif c == 2:
-            ro.move_backward(600)
-        elif c == 3:
-            ro.move_right(600)
-        elif c == 4:
-            ro.move_left(600)
+        try:
+            c = int(input())
+            if c == 0:
+                ro.stop_moving()
+            elif c == 1:
+                ro.move_forward(600)
+            elif c == 2:
+                ro.move_backward(600)
+            elif c == 3:
+                ro.move_left(600)
+            elif c == 4:
+                ro.move_right(600)
+            elif c == 5:
+                ro.move_counterclockwise(600)
+            elif c == 6:
+                ro.move_clockwise(600)
+
+        except ValueError:
+            print('Try again')
 
 
 cli.add_command(main)

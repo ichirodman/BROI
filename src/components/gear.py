@@ -2,7 +2,7 @@ import serial
 
 
 class Gear:
-    _ABS_LIMIT_VALUE = 255
+    _ABS_LIMIT_VALUE: int = 255
     _gear_f_s_l_power_value, _gear_f_s_r_power_value, _gear_b_s_l_power_value, _gear_b_s_r_power_value \
         = 0, 0, 0, 0
     _gear_driver = None
@@ -33,13 +33,13 @@ class Gear:
         self._gear_driver.write(encoded_signal)
 
     @staticmethod
-    def _cut_signal(val):
+    def _cut_signal(val: int):
         return min(Gear._ABS_LIMIT_VALUE, max(-Gear._ABS_LIMIT_VALUE, val))
 
     @staticmethod
-    def _up_cut_signal(val):
+    def _up_cut_signal(val: int):
         return -min(0, Gear._cut_signal(val))
 
     @staticmethod
-    def _down_cut_signal(val):
+    def _down_cut_signal(val: int):
         return max(0, Gear._cut_signal(val))
