@@ -1,6 +1,5 @@
 import sys
 import os
-import subprocess
 
 sys.path.insert(0, os.path.abspath('.'))
 sys.path.insert(0, os.path.abspath('.') + "/libs")
@@ -9,9 +8,7 @@ import click
 from src.components.sensors import Sensor
 from src.robbo_olympic import RobboOlympic
 
-
-def create_subprocess(args):
-    return subprocess.Popen(args, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+from tests.align_test import align_test
 
 
 @click.group()
@@ -22,14 +19,6 @@ def cli():
 @click.command(name='main')
 def main():
     print("Run main")
-
-
-@click.command(name='at', help='Align test')
-def align_test():
-    test_script = create_subprocess(['python', 'tests/align_test.py'])
-    test_output, errors = test_script.communicate()
-    test_script.wait()
-    print('Output : {}\nErrors : {}'.format(test_output, errors))
 
 
 @click.command(name='st', help='Sensors test')

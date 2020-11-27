@@ -1,7 +1,3 @@
-import sys
-import os
-
-sys.path.insert(0, os.path.abspath('.'))
-sys.path.insert(0, os.path.abspath('.') + "/libs")
+import click
 
 __all__ = ['align_test', 'sensor_ports_test']
