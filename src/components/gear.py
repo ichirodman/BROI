@@ -37,13 +37,13 @@ class Gear:
         self._gear_driver.write(encoded_signal)
 
     @staticmethod
-    def _cut_signal(val: int):
+    def _cut_signal(val):
         return min(Gear._ABS_LIMIT_VALUE, max(-Gear._ABS_LIMIT_VALUE, val))
 
     @staticmethod
-    def _up_cut_signal(val: int):
+    def _up_cut_signal(val):
         return -min(0, Gear._cut_signal(val))
 
     @staticmethod
-    def _down_cut_signal(val: int):
+    def _down_cut_signal(val):
         return max(0, Gear._cut_signal(val))
