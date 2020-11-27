@@ -1,3 +1,5 @@
+import click
+
 from src.robbo_olympic import RobboOlympic
 
 
