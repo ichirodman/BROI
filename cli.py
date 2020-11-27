@@ -79,6 +79,7 @@ def gear_debug():
 cli.add_command(main)
 cli.add_command(sensor_test)
 cli.add_command(gear_debug)
+cli.add_command(align_test)
 
 if __name__ == "__main__":
     cli()
