@@ -2,7 +2,7 @@ import serial
 
 
 class Gear:
-    _ABS_LIMIT_VALUE = 255
+    _ABS_LIMIT_VALUE = 1023
     _gear_f_s_l_power_value, _gear_f_s_r_power_value, _gear_b_s_l_power_value, _gear_b_s_r_power_value \
         = 0, 0, 0, 0
     _gear_driver = None
