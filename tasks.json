@@ -1,0 +1,6 @@
+[
+  {
+    "name": "test_task",
+    "executable": "tests/test_task.py"
+  }
+]

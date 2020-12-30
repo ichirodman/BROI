@@ -1,5 +1,5 @@
-from src.components.gear import Gear
-from src.components.sensors import Sensor
+from broi.components.gear import Gear
+from broi.components.sensors import Sensor
 
 
 class RobboOlympic:
