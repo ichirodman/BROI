@@ -1,2 +1,2 @@
 sudo apt update -y
-sudo pip3 -r requirements.txt
+sudo pip3 install -r requirements.txt

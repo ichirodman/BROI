@@ -26,14 +26,14 @@ class Gear:
 
     def _driver_write_gears_values(self):
         encoded_signal = "{}q{}w{}e{}r{}t{}y{}u{}i".format(
-            self._down_cut_signal(self._gear_f_s_l_power_value),
-            self._up_cut_signal(self._gear_f_s_l_power_value),
-            self._down_cut_signal(self._gear_f_s_r_power_value),
-            self._up_cut_signal(self._gear_f_s_r_power_value),
             self._down_cut_signal(self._gear_b_s_l_power_value),
-            self._up_cut_signal(self._gear_b_s_l_power_value),
+            self._up_cut_signal(self._gear_b_s_r_power_value),
             self._down_cut_signal(self._gear_b_s_r_power_value),
-            self._up_cut_signal(self._gear_b_s_r_power_value)).encode()
+            self._up_cut_signal(self._gear_f_s_r_power_value),
+            self._down_cut_signal(self._gear_f_s_r_power_value),
+            self._up_cut_signal(self._gear_f_s_l_power_value),
+            self._down_cut_signal(self._gear_f_s_l_power_value),
+            self._up_cut_signal(self._gear_b_s_l_power_value)).encode()
         self._gear_driver.write(encoded_signal)
 
     @staticmethod

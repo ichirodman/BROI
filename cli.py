@@ -24,7 +24,6 @@ def main():
 @click.command(name='runtask', help='Util for running scripts from user\'s device on the robot')
 @click.argument('executable_file_path', type=click.Path())
 def run_task(executable_file_path: str):
-    executable_file_path = 'tests/{}'.format(executable_file_path)
     _root_path = os.path.abspath('.')
 
     file_beginning_import_code = 'import sys\nimport os\nsys.path.insert(0, \'{}\')\nsys.path.insert(0,\'{}/libs\')\n'.format(
