@@ -30,7 +30,7 @@ def run_task(executable_file_path: str):
         _root_path, _root_path)
 
     with open(executable_file_path, 'r') as src_file:
-        src_file_content = '\n'.join(src_file.readlines())
+        src_file_content = ''.join(src_file.readlines())
 
     if file_beginning_import_code not in src_file_content:
         with open(executable_file_path, 'w') as src_file:
