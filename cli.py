@@ -5,10 +5,10 @@ sys.path.insert(0, os.path.abspath('.'))
 sys.path.insert(0, os.path.abspath('.') + "/libs")
 
 import click
-import subprocess
+import json
 
-from broi.components.sensors import Sensor
-from broi.robbo_olympic import RobboOlympic
+from shell_management.task_manager import TaskManager
+from shell_management.components_test_manager import ComponentsTestManager
 
 
 @click.group()
@@ -16,90 +16,67 @@ def cli():
     pass
 
 
-@click.command(name='main')
-def main():
-    print("Run main")
+@click.command(name='showtasks', help='Show tasks\' info')
+def show_tasks_info():
+    _task_view_template = 'Name: {}\nExecutable: {}\nInclude module: {}\n\n'
+    for task in TaskManager.get_tasks():
+        print(_task_view_template.format(task['name'], task['executable'], task['include_module']))
 
 
-@click.command(name='runtask', help='Util for running scripts from user\'s device on the robot')
+@click.command(name='execute', help='Util for running python scripts without modules yet')
 @click.argument('executable_file_path', type=click.Path())
-def run_task(executable_file_path: str):
-    _root_path = os.path.abspath('.')
-
-    file_beginning_import_code = 'import sys\nimport os\nsys.path.insert(0, \'{}\')\nsys.path.insert(0,\'{}/libs\')\n'.format(
-        _root_path, _root_path)
-
-    with open(executable_file_path, 'r') as src_file:
-        src_file_content = ''.join(src_file.readlines())
-
-    if file_beginning_import_code not in src_file_content:
-        with open(executable_file_path, 'w') as src_file:
-            src_file.write('{}\n{}'.format(file_beginning_import_code, src_file_content))
-
-    _script = subprocess.Popen(['python3', executable_file_path], shell=False,
-                               stdout=sys.stdout, stderr=sys.stderr)
-    try:
-        _script.wait()
-
-        _exit_code = _script.returncode
-
-        if _exit_code:
-            raise Exception(executable_file_path, _exit_code)
-        else:
-            print('Subprocess\'s finished. Bye.')
-    except KeyboardInterrupt:
-        _script.kill()
-        print('Was interrupted. Bye.')
+def run_script(executable_file_path: str):
+    TaskManager.run_script(executable_file_path)
 
 
-@click.command(name='st', help='Sensors test')
-def sensor_test():
-    for sensor_position, position_name in zip([Sensor.F_S_L, Sensor.F_S_R, Sensor.R_S_F, Sensor.R_S_B,
-                                               Sensor.B_S_R, Sensor.B_S_L, Sensor.L_S_B, Sensor.L_S_F],
-                                              ["F_S_L", "F_S_R", "R_S_F", "R_S_B", "B_S_R", "B_S_L", "L_S_B", "L_S_F"]):
-        print('Connecting to {}'.format(position_name))
-        sensor = Sensor(sensor_position)
-        try:
-            sensor.get_distance()
-            values = 'Values from : '
-            for _ in range(10):
-                values += str(sensor.get_distance()) + ' ;'
-            print(values)
-            print()
-        except AttributeError:
-            print('Sensor is not set')
-        print('-' * 20)
+@click.command(name='runtask', help='Util for running tasks recorded in tasks.json')
+@click.argument('task_name', type=click.STRING)
+def run_task(task_name: str):
+    TaskManager.run_task(task_name)
 
 
-@click.command(name='gd', help='Gear debug')
-def gear_debug():
-    ro = RobboOlympic(init_sensors=False)
-    while True:
-        try:
-            c = int(input())
-            if c == 0:
-                ro.stop_moving()
-            elif c == 1:
-                ro.move_forward(600)
-            elif c == 2:
-                ro.move_backward(600)
-            elif c == 3:
-                ro.move_left(600)
-            elif c == 4:
-                ro.move_right(600)
-            elif c == 5:
-                ro.move_counterclockwise(600)
-            elif c == 6:
-                ro.move_clockwise(600)
-
-        except ValueError:
-            print('Try again')
+@click.command(name='update_tasks', help='Updated tasks file')
+@click.argument('tasks_to_add', type=click.STRING)
+@click.argument('tasks_names_to_remove', type=click.STRING)
+def update_tasks(tasks_to_add: str, tasks_names_to_remove: str):
+    tasks_to_add = json.loads(tasks_to_add)
+    tasks_names_to_remove = json.loads(tasks_names_to_remove)
+    TaskManager.update_tasks(tasks_to_add, tasks_names_to_remove)
 
 
-cli.add_command(main)
+@click.command(name='ts', help='Test sensors')
+def test_sensors():
+    ComponentsTestManager.test_sensors()
+
+
+@click.command(name='tg', help='Test gear')
+def test_gear():
+    ComponentsTestManager.test_gear()
+
+
+cli.add_command(show_tasks_info)
+cli.add_command(run_script)
 cli.add_command(run_task)
-cli.add_command(sensor_test)
-cli.add_command(gear_debug)
+cli.add_command(update_tasks)
+cli.add_command(test_sensors)
+cli.add_command(test_gear)
 
 if __name__ == "__main__":
     cli()
+
+'''
+from pynput import keyboard
+from pynput.keyboard import Key
+
+def on_press(key):
+    #handle pressed keys
+    pass
+
+def on_release(key):
+    #handle released keys
+    if(key==Key.enter):
+        function_x()
+
+with keyboard.Listener(on_press=on_press,on_release=on_release) as listener:
+    listener.join()
+'''

@@ -34,7 +34,7 @@ class RobboOlympic:
         self.move_left(-power_value)
 
     def move_counterclockwise(self, power_value):
-        self._gear.power(power_value, -power_value, power_value, -power_value)
+        self._gear.power(-power_value, power_value, -power_value, power_value)
 
     def move_clockwise(self, power_value):
         self.move_counterclockwise(-power_value)
