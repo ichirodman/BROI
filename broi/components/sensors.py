@@ -1,6 +1,6 @@
 import time
 import RPi.GPIO as GPIO
-from libs.sensors.VL53L0X import VL53L0X
+from broi.components.external_libs.sensors.VL53L0X import VL53L0X
 
 from config.distance_sensors import *
 

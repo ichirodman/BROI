@@ -1,5 +1,4 @@
 import json
-import os
 import subprocess
 import sys
 import typing
@@ -99,7 +98,7 @@ class TaskManager:
 
             _include_code_template = "sys.path.insert(0, \'{}\')\n"
 
-            for _include_path in ['.', './libs', include_module_relative_path]:
+            for _include_path in ['.', './external_libs', include_module_relative_path]:
                 _include_code = _include_code_template.format(_include_path)
                 if _include_path is not None and _include_code not in _file_content:
                     _file.write(_include_code)

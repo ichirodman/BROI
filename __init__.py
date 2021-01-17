@@ -2,6 +2,6 @@ import sys
 import os
 
 sys.path.insert(0, os.path.abspath('.'))
-sys.path.insert(0, os.path.abspath('.') + "/libs")
+sys.path.insert(0, os.path.abspath('.') + "/external_libs")
 
-__all__ = ['broi', 'libs', 'config', 'tests']
+__all__ = ['broi', 'external_libs', 'config', 'tests']

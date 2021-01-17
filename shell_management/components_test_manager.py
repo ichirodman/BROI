@@ -14,8 +14,8 @@ class ComponentsTestManager:
             try:
                 _sensor.get_distance()
                 _values = 'Values from : '
-                for _ in range(10):
-                    _values += str(_sensor.get_distance()) + ' ;'
+                for _i in range(10):
+                    _values += str(_sensor.get_distance()) + ('; ' if _i < 9 else '.')
                 print('{}\n'.format(_values))
             except AttributeError:
                 print('Sensor is not set')
