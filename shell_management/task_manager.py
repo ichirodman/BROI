@@ -5,7 +5,7 @@ import typing
 
 
 class TaskManager:
-    __TASK_FILE_NAME = 'tasks.json'
+    __TASK_FILE_PATH = 'shell_management/tasks.json'
 
     @staticmethod
     def run_task(task_name: str):
@@ -44,7 +44,7 @@ class TaskManager:
 
     @staticmethod
     def get_tasks() -> list:
-        with open(TaskManager.__TASK_FILE_NAME, 'r') as _tasks_file:
+        with open(TaskManager.__TASK_FILE_PATH, 'r') as _tasks_file:
             _tasks = json.loads(''.join(_tasks_file.readlines()))
             _tasks_file.close()
         for i in range(len(_tasks)):
@@ -77,7 +77,7 @@ class TaskManager:
 
     @staticmethod
     def __load_tasks(tasks_to_load: list) -> None:
-        with open(TaskManager.__TASK_FILE_NAME, 'w') as _tasks_file:
+        with open(TaskManager.__TASK_FILE_PATH, 'w') as _tasks_file:
             _tasks = json.dumps(tasks_to_load)
             _tasks_file.truncate()
             _tasks_file.seek(0)

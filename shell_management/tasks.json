@@ -1,0 +1,10 @@
+[
+  {
+    "name": "test_task",
+    "executable": "tests/test_task.py"
+  },
+  {
+    "name": "align_test.py",
+    "executable": "tests/align_test.py"
+  }
+]
